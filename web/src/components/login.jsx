@@ -4,7 +4,7 @@ import { GlobalContext } from '../context/Context';
 import axios from 'axios';
 import './login.css'
 
-const baseUrl = 'http://localhost:5001'
+const baseUrl = 'http://localhost:5001/api/v1'
 
 
 function Login() {
