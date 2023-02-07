@@ -1,5 +1,5 @@
-
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { GlobalContext } from '../context/Context';
 
 import axios from 'axios';
 import './login.css'
@@ -8,26 +8,31 @@ const baseUrl = 'http://localhost:5001'
 
 
 function Login() {
-    const [result, setResult] = useState("");
+    let { state, dispatch } = useContext(GlobalContext);
 
+
+    const [result, setResult] = useState("");
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
 
-
-    const loginHandler = async(e) => {
+    const loginHandler = async (e) => {
         e.preventDefault();
-        
+
         try {
             let response = await axios.post(`${baseUrl}/login`, {
 
                 email: email,
                 password: password
-            },{
+            }, {
                 withCredentials: true
             })
 
+            dispatch({
+                type: 'USER_LOGIN',
+                payload: null
+            })
 
             console.log("Login successful");
             setResult("Login successful")
@@ -38,12 +43,14 @@ function Login() {
 
         // e.reset();
     }
-    
+
 
 
     return (
         <>
             <h4>This is Login page</h4>
+
+            {state.text}
 
             <form onSubmit={loginHandler} className="loginForm">
 
@@ -76,10 +83,10 @@ function Login() {
                 />
 
                 <br />
-                <button  type="submit">Login</button>
+                <button type="submit">Login</button>
 
             </form>
-            
+
             <p>{result}</p>
         </>
     )

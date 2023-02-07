@@ -29,7 +29,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-    origin: ['http://localhost:3000', "*"],
+    origin: ['http://localhost:3000', 'https://localhost:3000', "*"],
     credentials: true
 }));
 
@@ -159,8 +159,8 @@ app.post("/login", (req, res) => {
                             res.cookie('Token', token, {
                                 maxAge: 86_400_000,
                                 httpOnly: true,
-                                // sameSite: true,
-                                // secure: true
+                                sameSite: 'none',
+                                secure: true
                             });
 
                             res.send({
@@ -192,17 +192,19 @@ app.post("/login", (req, res) => {
                 return;
             }
         })
-})
+}, [])
 
 app.post("/logout", (req, res) => {
 
     res.cookie('Token', '', {
         maxAge: 1,
-        httpOnly: true
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true
     });
 
     res.send({ message: "Logout successful" });
-})
+}, [])
 
 app.use((req, res, next) => {
 
@@ -305,7 +307,7 @@ app.get('/products', (req, res) => {
             })
         }
     });
-})
+}, [])
 
 app.get('/product/:id', (req, res) => {
 
