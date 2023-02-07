@@ -154,7 +154,7 @@ app.post("/login", (req, res) => {
                                 exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24),
                             }, SECRET);
 
-                            console.log("token: ", token);
+                            console.log("token: ", token); 
 
                             res.cookie('Token', token, {
                                 maxAge: 86_400_000,
