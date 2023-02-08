@@ -1,13 +1,15 @@
 
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from 'axios';
+import { GlobalContext } from '../context/Context';
 
 
-const baseUrl = 'http://localhost:5001/api/v1'
 
 
 function Signup() {
+    let { state, dispatch } = useContext(GlobalContext);
+
 
     const [result, setResult] = useState("");
 
@@ -15,18 +17,17 @@ function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    
+
     const signupHandler = async (e) => {
         e.preventDefault();
 
         try {
-            let response = await axios.post(`${baseUrl}/signup`, {
+            let response = await axios.post(`${state.baseUrl}/signup`, {
                 firstName: name,
                 lastName: name,
                 email: email,
                 password: password
             })
-
 
             console.log("signup successful");
             setResult("signup successful")

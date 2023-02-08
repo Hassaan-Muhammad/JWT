@@ -16,7 +16,6 @@ import Signup from "./components/signup";
 
 
 function App() {
-  const baseUrl = 'http://localhost:5001/api/v1'
 
   let { state, dispatch } = useContext(GlobalContext);
   const [fullName, setFullName] = useState("");
@@ -24,7 +23,7 @@ function App() {
 
   const logoutHandler = async () => {
     try {
-      let response = await axios.post(`${baseUrl}/logout`, {
+      let response = await axios.post(`${state.baseUrl}/logout`, {
         withCredentials: true
       })
       dispatch({
@@ -38,12 +37,11 @@ function App() {
 
   useEffect(() => {
 
-    const baseUrl = 'http://localhost:5001/api/v1'
 
     const getProfile = async () => {
 
       try {
-        let response = await axios.get(`${baseUrl}/products`, {
+        let response = await axios.get(`${state.baseUrl}/products`, {
           withCredentials: true
         })
         dispatch({

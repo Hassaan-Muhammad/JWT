@@ -4,7 +4,6 @@ import { GlobalContext } from '../context/Context';
 import axios from 'axios';
 import './login.css'
 
-const baseUrl = 'http://localhost:5001/api/v1'
 
 
 function Login() {
@@ -21,7 +20,7 @@ function Login() {
         e.preventDefault();
 
         try {
-            let response = await axios.post(`${baseUrl}/login`, {
+            let response = await axios.post(`${state.baseUrl}/login`, {
 
                 email: email,
                 password: password
