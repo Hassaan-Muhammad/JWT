@@ -31,7 +31,7 @@ router.post('/product', (req, res) => {
         name: body.name,
         price: body.price,
         description: body.description,
-        owner: new mongoose.Types.ObjectId(body.Token._id)
+      
     },
         (err, saved) => {
             if (!err) {
@@ -50,9 +50,9 @@ router.post('/product', (req, res) => {
 
 router.get('/products', (req, res) => {
 
-    const userId= new mongoose.Types.ObjectId(req.body.Token._id);
+    
 
-    productModel.find({ owner:userId }, (err, data) => {
+    productModel.find({}, (err, data) => {
         if (!err) {
             res.send({
                 message: "got all products successfully",
