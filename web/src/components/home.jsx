@@ -22,7 +22,7 @@ function Home() {
       const response = await axios.get(`${state.baseUrl}/products`)
       console.log("response: ", response.data);
 
-      setProducts(response.data.data.reverse())
+      setProducts(response.data.data)
 
     } catch (error) {
       console.log("error in getting all products", error);
